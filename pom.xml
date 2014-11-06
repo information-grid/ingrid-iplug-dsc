@@ -14,9 +14,9 @@
   <name>ingrid-iplug-dsc-scripted</name>
   <scm>
     <connection>
-    scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-iplug-dsc-scripted/trunk</connection>
+    scm:git:git@github.com:information-grid/ingrid-iplug-dsc.git</connection>
     <developerConnection>
-    scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-iplug-dsc-scripted/trunk</developerConnection>
+    scm:git:git@github.com:information-grid/ingrid-iplug-dsc.git</developerConnection>
   </scm>
   <repositories>
     <!-- Repo of parent pom needed, parent pom may not be installed locally yet -->
