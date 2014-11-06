@@ -232,6 +232,8 @@
              <manifestEntries>
                <!-- see ingrid-utils:de.ingrid.utils.metadata.IPlugType-->
                <iPlug-Type>IPLUG_DSC</iPlug-Type>
+               <Hudson-Build-Number>${BUILD_NUMBER}</Hudson-Build-Number>
+               <Hudson-Project>${JOB_NAME}</Hudson-Project>
              </manifestEntries>
            </archive>
          </configuration>
