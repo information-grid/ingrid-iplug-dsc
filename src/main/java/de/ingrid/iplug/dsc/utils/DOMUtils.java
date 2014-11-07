@@ -1,25 +1,24 @@
-/**
- * Copyright (c) 2014 wemove GmbH
- * Licensed under the EUPL V.1.1
- *
- * This Software is provided to You under the terms of the European
- * Union Public License (the "EUPL") version 1.1 as published by the
- * European Union. Any use of this Software, other than as authorized
- * under this License is strictly prohibited (to the extent such use
- * is covered by a right of the copyright holder of this Software).
- *
- * This Software is provided under the License on an "AS IS" basis and
- * without warranties of any kind concerning the Software, including
- * without limitation merchantability, fitness for a particular purpose,
- * absence of defects or errors, accuracy, and non-infringement of
- * intellectual property rights other than copyright. This disclaimer
- * of warranty is an essential part of the License and a condition for
- * the grant of any rights to this Software.
- *
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>
- */
-/**
+/*
+ * **************************************************-
+ * ingrid-iplug-dsc-scripted
+ * ==================================================
+ * Copyright (C) 2014 wemove digital solutions GmbH
+ * ==================================================
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
  * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ * 
+ * http://ec.europa.eu/idabc/eupl5
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * **************************************************#
  */
 package de.ingrid.iplug.dsc.utils;
 
@@ -38,7 +37,7 @@ import de.ingrid.utils.xpath.XPathUtils;
 /**
  * Helper class encapsulating functionality for DOM processing. Must be
  * instantiated to be thread safe.
- * 
+ *
  * @author Martin
  */
 public class DOMUtils {
@@ -63,7 +62,7 @@ public class DOMUtils {
 
     /**
      * Get the URI of a Namespace prefix.
-     * 
+     *
      * @param prefix
      * @return null if not added yet
      */
@@ -113,7 +112,7 @@ public class DOMUtils {
          * the parent of 'e' the new node will be inserted before the sibling of
          * 'e'. If this sibling does not exist (because it was the last one),
          * the new node will added to the end.
-         * 
+         *
          * @param qualifiedName
          *            , contains the path of nodes to create
          * @return
@@ -175,24 +174,24 @@ public class DOMUtils {
         public Element getElement() {
             return e;
         }
-        
+
         public IdfElement getParent() {
             return getParent( 1 );
         }
-        
+
         public IdfElement getParent( int pos ) {
             Node parent = e.getParentNode();
             for (int i = 0; i < pos-1; i++) {
                 if (parent == null) break;
-                parent = parent.getParentNode();                
+                parent = parent.getParentNode();
             }
-            
+
             if (parent == null)
                 return null;
             else
                 return new IdfElement( (Element) parent );
         }
-        
+
     }
 
     public IdfElement convertToIdfElement(Element element) {
@@ -286,7 +285,7 @@ public class DOMUtils {
 
     /**
      * Create an Element WITHOUT NameSpace (NS) qualification !
-     * 
+     *
      * @param nameWithoutNS
      *            if you pass name with NS prefix (*:*), the prefix isn't
      *            handles as namespace !
@@ -308,7 +307,7 @@ public class DOMUtils {
     /**
      * Create an Element WITH NameSpace (NS) qualification ! Namespace URI must
      * be added with its prefix to internal map before calling this method !!!
-     * 
+     *
      * @param nsKey
      *            key of NS, must be present in internal map for mapping to URI
      *            !

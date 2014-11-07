@@ -1,25 +1,24 @@
-/**
- * Copyright (c) 2014 wemove GmbH
- * Licensed under the EUPL V.1.1
- *
- * This Software is provided to You under the terms of the European
- * Union Public License (the "EUPL") version 1.1 as published by the
- * European Union. Any use of this Software, other than as authorized
- * under this License is strictly prohibited (to the extent such use
- * is covered by a right of the copyright holder of this Software).
- *
- * This Software is provided under the License on an "AS IS" basis and
- * without warranties of any kind concerning the Software, including
- * without limitation merchantability, fitness for a particular purpose,
- * absence of defects or errors, accuracy, and non-infringement of
- * intellectual property rights other than copyright. This disclaimer
- * of warranty is an essential part of the License and a condition for
- * the grant of any rights to this Software.
- *
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>
- */
-/**
+/*
+ * **************************************************-
+ * ingrid-iplug-dsc-scripted
+ * ==================================================
+ * Copyright (C) 2014 wemove digital solutions GmbH
+ * ==================================================
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
  * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ * 
+ * http://ec.europa.eu/idabc/eupl5
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * **************************************************#
  */
 package de.ingrid.iplug.dsc.utils;
 
@@ -39,7 +38,7 @@ import org.apache.log4j.Logger;
 /**
  * Helper class encapsulating SQL access via JDBC connection (e.g. used in
  * mapping script). Must be instantiated to be thread safe.
- * 
+ *
  * @author Martin
  */
 public class SQLUtils {
@@ -58,7 +57,7 @@ public class SQLUtils {
 
     /**
      * Executes a SQL and returns the first record result.
-     * 
+     *
      * @param sqlStr
      *            The SQL to execute.
      * @return A map with column names as keys and column values as String (can
@@ -76,7 +75,7 @@ public class SQLUtils {
 
     /**
      * Executes a SQL and returns the first record result.
-     * 
+     *
      * @param sqlStr
      *            The SQL to execute.
      * @param sqlParams
@@ -96,7 +95,7 @@ public class SQLUtils {
 
     /**
      * Executes a SQL and returns a list with records results
-     * 
+     *
      * @param sqlStr
      *            the sql to execute
      * @return list of maps, one per row, with column names as keys and column
@@ -109,7 +108,7 @@ public class SQLUtils {
 
     /**
      * Executes a SQL and returns a list with records results
-     * 
+     *
      * @param sqlStr
      *            the sql to execute
      * @param sqlParams
@@ -155,7 +154,7 @@ public class SQLUtils {
 
     /**
      * Helper method that converts a ResultSet into a list of maps, one per row
-     * 
+     *
      * @param query
      *            ResultSet
      * @return list of maps, one per column row, with column names as keys and
@@ -172,7 +171,7 @@ public class SQLUtils {
     /**
      * Helper method that maps a ResultSet into a list of maps, one per row.
      * NOTICE: Calls trim() to remove whitespaces from values
-     * 
+     *
      * @param query
      *            ResultSet
      * @param list
@@ -204,7 +203,7 @@ public class SQLUtils {
 
     /**
      * Return all column names as a list of strings
-     * 
+     *
      * @param database
      *            query result set
      * @return list of column name strings

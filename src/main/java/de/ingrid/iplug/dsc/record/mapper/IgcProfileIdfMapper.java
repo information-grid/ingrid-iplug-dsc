@@ -1,25 +1,24 @@
-/**
- * Copyright (c) 2014 wemove GmbH
- * Licensed under the EUPL V.1.1
- *
- * This Software is provided to You under the terms of the European
- * Union Public License (the "EUPL") version 1.1 as published by the
- * European Union. Any use of this Software, other than as authorized
- * under this License is strictly prohibited (to the extent such use
- * is covered by a right of the copyright holder of this Software).
- *
- * This Software is provided under the License on an "AS IS" basis and
- * without warranties of any kind concerning the Software, including
- * without limitation merchantability, fitness for a particular purpose,
- * absence of defects or errors, accuracy, and non-infringement of
- * intellectual property rights other than copyright. This disclaimer
- * of warranty is an essential part of the License and a condition for
- * the grant of any rights to this Software.
- *
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>
- */
-/**
+/*
+ * **************************************************-
+ * ingrid-iplug-dsc-scripted
+ * ==================================================
+ * Copyright (C) 2014 wemove digital solutions GmbH
+ * ==================================================
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
  * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ * 
+ * http://ec.europa.eu/idabc/eupl5
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * **************************************************#
  */
 package de.ingrid.iplug.dsc.record.mapper;
 
@@ -61,9 +60,9 @@ import de.ingrid.utils.xpath.XPathUtils;
  * to be in a SQL record property named "igc_profile".
  * <p/>
  * The mapper expects a base IDF format already present in {@link doc}.
- * 
+ *
  * @author joachim@wemove.com
- * 
+ *
  */
 @Order(3)
 public class IgcProfileIdfMapper implements IIdfMapper {
@@ -71,7 +70,7 @@ public class IgcProfileIdfMapper implements IIdfMapper {
     protected static final Logger log = Logger.getLogger(IgcProfileIdfMapper.class);
 
     private String sql;
-    
+
     private ScriptEngine engine = null;
 
     @Override
@@ -82,7 +81,7 @@ public class IgcProfileIdfMapper implements IIdfMapper {
         ConfigurableNamespaceContext cnc = new ConfigurableNamespaceContext();
         cnc.addNamespaceContext(new IDFNamespaceContext());
         cnc.addNamespaceContext(new IgcProfileNamespaceContext());
-        
+
         XPathUtils xpathUtils = new XPathUtils(cnc);
         if (!(xpathUtils.nodeExists(doc, "//idf:html"))) {
             throw new IllegalArgumentException("Document is no IDF!");
@@ -120,16 +119,16 @@ public class IgcProfileIdfMapper implements IIdfMapper {
                                 ScriptEngineManager mgr = new ScriptEngineManager();
                                 engine = mgr.getEngineByExtension("js");
                             }
-    
+
                             // create utils for script
                             SQLUtils sqlUtils = new SQLUtils(connection);
                             // get initialized XPathUtils (see above)
                             TransformationUtils trafoUtils = new TransformationUtils(sqlUtils);
                             DOMUtils domUtils = new DOMUtils(doc, xpathUtils);
                             domUtils.addNS("idf", "http://www.portalu.de/IDF/1.0");
-                            
+
                             IdfUtils idfUtils = new IdfUtils(sqlUtils, domUtils, xpathUtils);
-    
+
                             Bindings bindings = engine.createBindings();
                             bindings.put("sourceRecord", record);
                             bindings.put("idfDoc", doc);
@@ -140,7 +139,7 @@ public class IgcProfileIdfMapper implements IIdfMapper {
                             bindings.put("TRANSF", trafoUtils);
                             bindings.put("DOM", domUtils);
                             bindings.put("IDF", idfUtils);
-    
+
                             // backwards compatibility
                             if (System.getProperty( "java.version" ).startsWith( "1.8" )) {
                                 igcProfileCswMapping = "load('nashorn:mozilla_compat.js');" + igcProfileCswMapping;
@@ -154,7 +153,7 @@ public class IgcProfileIdfMapper implements IIdfMapper {
                         }
                     }
                 }
-                
+
             }
         } catch (SQLException e) {
             log.error("Error mapping IGC profile.", e);

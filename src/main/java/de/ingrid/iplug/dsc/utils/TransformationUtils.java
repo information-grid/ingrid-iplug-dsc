@@ -1,25 +1,24 @@
-/**
- * Copyright (c) 2014 wemove GmbH
- * Licensed under the EUPL V.1.1
- *
- * This Software is provided to You under the terms of the European
- * Union Public License (the "EUPL") version 1.1 as published by the
- * European Union. Any use of this Software, other than as authorized
- * under this License is strictly prohibited (to the extent such use
- * is covered by a right of the copyright holder of this Software).
- *
- * This Software is provided under the License on an "AS IS" basis and
- * without warranties of any kind concerning the Software, including
- * without limitation merchantability, fitness for a particular purpose,
- * absence of defects or errors, accuracy, and non-infringement of
- * intellectual property rights other than copyright. This disclaimer
- * of warranty is an essential part of the License and a condition for
- * the grant of any rights to this Software.
- *
- * For more  details, see <http://joinup.ec.europa.eu/software/page/eupl>
- */
-/**
+/*
+ * **************************************************-
+ * ingrid-iplug-dsc-scripted
+ * ==================================================
+ * Copyright (C) 2014 wemove digital solutions GmbH
+ * ==================================================
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
  * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ * 
+ * http://ec.europa.eu/idabc/eupl5
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * **************************************************#
  */
 package de.ingrid.iplug.dsc.utils;
 
@@ -42,7 +41,7 @@ import de.ingrid.utils.udk.UtilsUDKCodeLists;
 
 /**
  * Helper class encapsulating functionality for transforming or processing values (e.g. used in mapping script). Must be instantiated to be thread safe.
- *  
+ *
  * @author Martin
  */
 public class TransformationUtils {
@@ -62,11 +61,11 @@ public class TransformationUtils {
 	    this.SQL = sqlUtils;
 	    //initCodelists();
 	}
-	
+
 	/**
 	 * Transform the codelists from the database into a hierarchical hashmap to
 	 * access each codelist entry easily.
-	 * 
+	 *
 	 * Now there are separate SQL-queries for each syslist transformation!
 	 */
 //	private void initCodelists() {
@@ -80,15 +79,15 @@ public class TransformationUtils {
 //                    cl = new HashMap<String, Map<String, String>>();
 //                    codelists.put(syslist.get("lst_id"), cl);
 //                }
-//                
+//
 //                Map<String, String> clEntry = (Map<String, String>) cl.get(syslist.get("entry_id"));
 //                if (clEntry == null) {
 //                    clEntry = new HashMap<String, String>();
 //                    cl.put(syslist.get("entry_id"), clEntry);
 //                }
-//                
+//
 //                clEntry.put(syslist.get("lang_id"), syslist.get("name"));
-//                
+//
 //            }
 //        } catch (SQLException e) {
 //            // TODO Auto-generated catch block
@@ -107,7 +106,7 @@ public class TransformationUtils {
 		// get catalog language in "syslist format" (de, en, ...)
 		Integer catLangKey = getIGCCatalogLanguageKey();
 		String catLangShortcut = UtilsLanguageCodelist.getShortcutFromCode(catLangKey);
-		
+
 		return getIGCSyslistEntryName(listId, entryId, catLangShortcut);
 	}
 
@@ -129,7 +128,7 @@ public class TransformationUtils {
 	    	retValue = row.get("name");
 	    	break;
 	    }
-	    
+
 	    return retValue;
 	}
 
@@ -144,11 +143,11 @@ public class TransformationUtils {
 		if (syslistId == 6005) {
 			result = UtilsUDKCodeLists.parseCodeListEntryName(fullName, UtilsUDKCodeLists.ParseType.DATE_AT_END);
 		}
-		
+
 		return result;
 	}
 
-	/** Get language of catalog (entry id of language syslist). 
+	/** Get language of catalog (entry id of language syslist).
 	 * @return Null if catalog not found !?
 	 * @throws SQLException
 	 */
@@ -183,16 +182,16 @@ public class TransformationUtils {
 		} else if ("bis".equals(time_type)) {
 			retMap.put("t2", preprocessIGCTimeField("t2", time_to));
 		}
-		
+
 	    /*
 	     * Set the boundaries of dates to values that can be compared with lucene. The
 	     * value of infinite past is '00000000' and the value for infinite future is '99999999'.
-	     * 
-	     * Makes sure that the fields are only set, if we have a UDK date type of 'seit' or 'bis'. 
+	     *
+	     * Makes sure that the fields are only set, if we have a UDK date type of 'seit' or 'bis'.
 	     * We can do this because the mapping filters and maps the dates to t0 in case of date type
-	     * 'am' and to t1 in case of 'seit', even if the database fields are the same. Thus we do not 
-	     * need to look at the DB field time_type which controls the date 
-	     * type ('am', 'seit', 'bis', 'von (von-bis)')   
+	     * 'am' and to t1 in case of 'seit', even if the database fields are the same. Thus we do not
+	     * need to look at the DB field time_type which controls the date
+	     * type ('am', 'seit', 'bis', 'von (von-bis)')
 	     */
         if (tmpInfo.get("t1") != null && tmpInfo.get("t2") == null && tmpInfo.get("t0") == null) {
         	if (log.isDebugEnabled()) {
@@ -205,12 +204,12 @@ public class TransformationUtils {
         	}
         	retMap.put("t1", "00000000");
         }
-        
+
         // clean up
         tmpInfo.remove("t0");
         tmpInfo.remove("t1");
         tmpInfo.remove("t2");
-        
+
         return retMap;
 	}
 
@@ -231,7 +230,7 @@ public class TransformationUtils {
         if (value.length() > 0) {
         	tmpInfo.put(fieldName, value);
         }
-        
+
         return value;
 	}
 
@@ -255,7 +254,7 @@ public class TransformationUtils {
     }
 
 	/**
-	 * Get ISO 639-2 language shortcut (e.g. "ger, "eng" ...") from IGC language code. 
+	 * Get ISO 639-2 language shortcut (e.g. "ger, "eng" ...") from IGC language code.
 	 * @param igcLangCode IGC code of language. e.g. "150"
 	 * @return ISO 639-2 language shortcut (bibliographic code !) or null if not found
 	 */
@@ -317,7 +316,7 @@ public class TransformationUtils {
 	/**
 	 * Returns a codeList entry based on an IGC code list domain id and a specific "language" code.
 	 * NOTICE: "language" code can also be just a code for fetching a ingrid specific representation
-	 * of the entry (e.g. ingrid query value of a topic in "Umweltthemen"). 
+	 * of the entry (e.g. ingrid query value of a topic in "Umweltthemen").
 	 * If the codelist entry cannot be found null is returned.
 	 */
 	public String getCodeListEntryFromIGCSyslistEntry(Long igcCodeListId, String igcEntryId, String langIdInCodelist) {
@@ -334,7 +333,7 @@ public class TransformationUtils {
 		}
         if (log.isDebugEnabled()) {
             log.debug("Transform IGC syslist entry -> listId '" + igcCodeListId +
-            	"', entryId '" + igcEntryId + "', langId '" + langIdInCodelist + 
+            	"', entryId '" + igcEntryId + "', langId '" + langIdInCodelist +
             	"' to entry of CodeList '" + retValue + "'.");
         }
 
@@ -362,8 +361,8 @@ public class TransformationUtils {
 
 		return retValue;
 	}
-	
-	
+
+
 	public String getISOCodeListEntryData(Long codeListId, String entryValue ) {
 		if (entryValue == null) {
 			return null;
@@ -384,9 +383,9 @@ public class TransformationUtils {
 
 	/**
 	 * Returns a ISO3166-1 Alpha-3 code based on a given numeric id.
-	 * 
+	 *
 	 * @param numericCode The numeric id.
-	 * @return The ISO3166-1 Alpha-3 code or the numeric id. 
+	 * @return The ISO3166-1 Alpha-3 code or the numeric id.
 	 */
 	public String getISO3166_1_Alpha_3FromNumericLanguageCode(String numericCode) {
         String iso3166_1_Alpha_3;
@@ -399,11 +398,11 @@ public class TransformationUtils {
         if (log.isDebugEnabled()) {
             log.debug("Transform numeric language code '" + numericCode + "' to ISO3166-1 Alpha-3 code:" + iso3166_1_Alpha_3);
         }
-        
+
         return iso3166_1_Alpha_3;
-	    	    
+
 	}
-	
+
 	/** Transforms given IGC date string (e.g. t0, t1, t2 from index) to a valid ISO Date String.
 	 * Returns unchanged date (the passed one) if problems occur ! */
 	public String getISODateFromIGCDate(String igcDate) {
@@ -426,7 +425,7 @@ public class TransformationUtils {
 				log.debug("Could not convert to gco:Decimal: " + igcNumber, e);
 			}
 			retValue = "NaN";
-		}		
+		}
 		return retValue;
     }
 
